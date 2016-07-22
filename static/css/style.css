@@ -5,9 +5,11 @@ body{
 	height:50px;
 	width: 50px;
 	float:left;
-	margin-left:20px;
-	margin-top:15px;
+	left:20px;
+	top:15px;
 	display: inline;
+	position: fixed;
+	z-index: 3;
 }
 .nav{
 	height:80px;
@@ -20,8 +22,8 @@ body{
 	border-bottom-width: 2px;
 	border-bottom-style: solid;
 	border-color: #dfdfdf;
-	background: #cfcfcf;
 	z-index: 1;
+	background-image: url("../images/metal-bg.jpg");
 }
 .nav ul{
 	list-style: none;
@@ -46,7 +48,7 @@ body{
 	border-right-style: solid;
 	border-width: 2px;
 	border-color: #dfdfdf;
-	background: #d5d5d5;
+	background: rgba(229,229,229,0.4);
 }
 .nav-but1{
 	border-left-style: solid;
@@ -60,7 +62,7 @@ body{
 	color:#555;
 }
 .nav li:hover{
-	background: #eee;
+	background: rgba(240,240,240,0.4);
 }
 .nav .active{
 	background: #e6f7ff !important;
@@ -232,6 +234,7 @@ input[type=range]:focus::-ms-fill-upper {
 	margin:0 auto;
 }
 .bot-bar-bot .controls{
+	text-shadow: 0px 0px 3px white;
 	position: relative;
 	margin:0 auto;
 	padding:0;
