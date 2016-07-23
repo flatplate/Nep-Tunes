@@ -1,7 +1,7 @@
 var fs		=	require('fs');
 var path	=	require('path');
 
-var exts = {
+var ext = {
 	video : [
 		".mpg",
 		".mpeg",
@@ -46,7 +46,7 @@ var bannedDirs = [
 ];
 
 
-function fromDir(startPath, onFound){
+var fromDir = function(startPath, callback){
 
     //console.log('Starting from dir '+startPath+'/');
 
@@ -63,26 +63,32 @@ function fromDir(startPath, onFound){
 	        if (stat.isDirectory() && bannedDirs.indexOf(filename) === -1 && bannedDirs.indexOf(files[i]) === -1&& files[i][0] !="."){
 	  //      	console.log(filename + bannedDirs.indexOf(filename));
 	        
-	            fromDir(filename,exts, bannedDirs); //recurse
+	            fromDir(filename, callback); //recurse
 
 	        }
-	        else if (exts.video.indexOf(path.extname(filename))>-1) {
+	        else if (ext.video.indexOf(path.extname(filename))>-1) {
 	            console.log('-- found video: ',filename);
-	            onFound("video". filename);
+	            callback("video", filename, files[i]);
 	        }
-	        else if (exts.audio.indexOf(path.extname(filename))>-1) {
+	        else if (ext.audio.indexOf(path.extname(filename))>-1) {
 	            console.log('-- found music: ',filename);
-	            onFound("audio", filename);
+	//            console.log(typeof(callback));
+	//            console.log(callback);
+	            callback("audio", filename, files[i]);
 	        }
 	        else{
 	  //      	console.log(path.extname(filename));
 	        };
     	}
     	catch(err){
-    		console.log(err);
+    //		console.log(err);
     	}
     };
 };
 
-fromDir("C:\\", exts, bannedDirs);
-exports.find = fromDir;
+var getAsync = function(startPath, callback){
+	setTimeout(function(){
+		fromDir(startPath, callback);
+	}, -1);
+};
+exports.find = getAsync;

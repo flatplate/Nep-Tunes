@@ -248,3 +248,47 @@ input[type=range]:focus::-ms-fill-upper {
 	color:#009de6;
 	text-shadow: 0px 0px 3px #33beff;
 }
+.sec{
+	left:0;
+	width:100%;
+	margin:0 auto;
+	padding:0;
+	margin-top: 120px;
+}
+.sec-songs-music{
+}
+.sec #songs-music{
+	width:100%;
+	padding:0;
+	margin:0 auto;
+	left:0;
+	border-spacing: 0;
+	margin-bottom:80px;
+}
+#songs-music tr{
+	left:0;
+	padding:0;
+	margin: 0 auto;
+}
+#songs-music td > div{
+	overflow: hidden;
+	height:25px;
+	line-height: 25px;
+}
+.sec #songs-music td, th {
+    text-align: left;
+    padding: 0;
+    margin:0;
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+    padding-left: 8px;
+}
+.sec #songs-music tr:nth-child(even) {
+    background-color: #5e7c87;
+}
+.sec #songs-music tr:hover {
+    background-color: #96adb6;
+}
+.hidden{
+	display:none;
+}

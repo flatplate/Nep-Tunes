@@ -3,6 +3,8 @@
 		<link rel="stylesheet" href="css/style.css">
 		<link rel="stylesheet" href="font-awesome-4.6.3/css/font-awesome.min.css">
 		<script src="js/jquery-3.1.0.min.js"></script>
+		<script src="/socket.io/socket.io.js"></script>
+		<script type="text/javascript" src="js/jquery.tablesorter.js"></script> 
 		<script src="js/main.js"></script>
 		<link href='https://fonts.googleapis.com/css?family=Oswald:300' rel='stylesheet' type='text/css'>
 		<link rel="icon" href="images/neptune.jpg">
@@ -46,10 +48,24 @@
 				</div>
 			</div>
 			<div class="main-sec">
-				
+				<div class="sec sec-music-songs hidden">
+					<table id ="songs-music" class="tablesorter">	
+						<tr style="background: #496069">
+						<thead>
+						    <th >Name</th>
+						    <th>Album</th> 
+						    <th>Path</th>
+						    </thead>
+					  	</tr>
+					</table>
+  				</div>
+				<div class="sec sec-music-albums hidden">		</div>
+				<div class="sec sec-music-artists">		</div>
+				<div class="sec sec-music-playlists hidden">	</div>
+				<div class="sec sec-videos hidden ">			</div>
+				<div class="sec sec-albums-image hidden">		</div>
+				<div class="sec sec-images-image hidden">		</div>
 			</div>
-
-
 			<div class="bot-bar">
 				<div class="slide">
 					<input type="range" minimum="0" maximum="100" step="0.1" value="0">
