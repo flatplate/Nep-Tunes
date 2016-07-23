@@ -2,8 +2,10 @@ var menuItems = ["Video", "Music", "Image"];
 var subMenuMusic = ["Artists", "Albums", "Songs", "Playlists"];
 var subMenuImage = ["Albums", "Images"];
 var activeMenu = "Music";
-var activeSubMusic = "Artists";
-var activeSubImage = "Albums";
+var subActive = {
+	"Music" : "Artists",
+	"Image" : "Albums"
+}
 
 $(document).ready(function(){
 	$(".navs li").click(function(){
@@ -24,12 +26,12 @@ $(document).ready(function(){
 	$(".sub-menu-music li").click(function(){
 		$(".sub-menu-music li").removeClass("cur");
 		$(this).addClass("cur");
-		activeSubMusic = $(this).text();
+		subActive["Music"] = $(this).text();
 	});
 	$(".sub-menu-image li").click(function(){
 		$(".sub-menu-image li").removeClass("cur");
 		$(this).addClass("cur");
-		activeSubImage = $(this).text();
+		subActive["Image"] = $(this).text();
 	});
 	$(".sub-menu-video li").click(function(){
 		$(".sub-menu-video li").removeClass("cur");

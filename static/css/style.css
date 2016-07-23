@@ -1,5 +1,7 @@
 body{
-	background: #fcfcfc;
+	background: #698996;
+	color : #fff;
+	font-family: 'Oswald', sans-serif;
 }
 .neptune{
 	height:50px;
@@ -23,7 +25,7 @@ body{
 	border-bottom-style: solid;
 	border-color: #dfdfdf;
 	z-index: 1;
-	background-image: url("../images/metal-bg.jpg");
+	background: #495f69;
 }
 .nav ul{
 	list-style: none;
@@ -48,7 +50,7 @@ body{
 	border-right-style: solid;
 	border-width: 2px;
 	border-color: #dfdfdf;
-	background: rgba(229,229,229,0.4);
+	background: rgba(120,149,161,0.4);
 }
 .nav-but1{
 	border-left-style: solid;
@@ -59,15 +61,16 @@ body{
 	font-size: 50px;
 	vertical-align: center;
 	line-height: 70px;
-	color:#555;
+	color:#eee;
 }
 .nav li:hover{
 	background: rgba(240,240,240,0.4);
 }
 .nav .active{
-	background: #e6f7ff !important;
+	background:#03A9F4  !important;
 	height:82px;
 	z-index: 2;
+	color:#fff;
 	border-bottom-width: 0;	
 }
 .sub-menu{
@@ -77,10 +80,8 @@ body{
 	display:block;
 	top:80px;
 	left:0;
-	background:#e6f7ff;
-	border-style: hidden hidden solid;
-	border-color:#efefef;
-	box-shadow: 0px 2px 5px #aaa;
+	background:#03A9F4;
+	box-shadow: 0px 2px 5px #333;
 }
 
 .sub-menu ul{
@@ -118,7 +119,7 @@ body{
 	display:inline-block !important;
 }
 .sub-menu .active li.cur{
-	background-color: #b3e7ff;
+	background-color: #0288d1;
 }
 .bot-bar{
 	height:65px;
@@ -126,8 +127,8 @@ body{
 	position: fixed;
 	width: 100%;
 	left:0;
-	background:#eee;
-	box-shadow: 0px -2px 5px #aaa;
+	background:#495f69;
+	box-shadow: 0px -2px 5px #333;
 }
 .bot-bar .slide{
 	margin-top: -25px;
@@ -145,7 +146,7 @@ input[type=range]::-webkit-slider-runnable-track {
   height: 6px;
   cursor: pointer;
   animate: 0.2s;
-  box-shadow: 0px -2px 5px #888;
+  box-shadow: 0px -2px 5px #333;
   background: #3071a9;
   border-radius: 1.3px;
   border: 0.2px solid #010101;
@@ -234,7 +235,7 @@ input[type=range]:focus::-ms-fill-upper {
 	margin:0 auto;
 }
 .bot-bar-bot .controls{
-	text-shadow: 0px 0px 3px white;
+	text-shadow: 0px 0px 3px #444;
 	position: relative;
 	margin:0 auto;
 	padding:0;
@@ -245,5 +246,5 @@ input[type=range]:focus::-ms-fill-upper {
 }
 .bot-bar-bot i:hover{
 	color:#009de6;
-	text-shadow: 0px 0px 5px #33beff;
+	text-shadow: 0px 0px 3px #33beff;
 }
