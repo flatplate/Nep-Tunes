@@ -5,15 +5,13 @@ var	swig = require('swig');
 var http = require('http').Server(app);
 var fs = require('fs');
 var Datastore = require('nedb');
+var ms = require('mediaserver');
 var getFiles = require("./exts.js");
 var io = require('socket.io')(http);
 
 var db_audio = new Datastore({ filename: './db_audio', autoload: true });
 var db_image = new Datastore({ filename: './db_image', autoload: true });
 var db_video = new Datastore({ filename: './db_video', autoload: true });
-
-//TODO: use ffmpeg to get data from audio files
-//TODO: don't fuck up the database, make filepath unique
 
 app.use(express.static('static'));
 app.use(bodyParser.urlencoded({extended:false}));
@@ -36,7 +34,6 @@ getFiles.find("C:\\", function(type, file, name){
 		db_audio.insert(doc, function(err){
 			console.log(err);
 		});
-		console.log(doc);
 	};
 });
 
@@ -46,14 +43,17 @@ http.listen(1997, function(){
 app.get('/', function(req,res){
 	res.send(swig.renderFile('./templates/index.html'));
 });
+app.get('/play/:id',function(req,res){
+
+	var aud = db_audio.find({_id: req.params.id}, function(err,docs){
+    	// We replaced all the event handlers with a simple call to readStream.pipe()
+    	ms.pipe(req,res,docs[0].path);
+	});
+});
 io.on('connection', function (socket) {
-	console.log("dayum");
-  var audios = db_audio.find({}, function(err,docs){
-  	for(var i = 0; i < docs.length; i++){
-  		socket.emit('audio', docs[i]);
-  	}
-  });
-  socket.on('my other event', function (data) {
-    console.log(data);
+  	db_audio.find({}).sort({ name: 1 }).exec(function (err, docs){
+	  	for(var i = 0; i < docs.length; i++){
+	  		socket.emit('audio', docs[i]);
+	  	}
   });
 });

@@ -14,7 +14,6 @@ var ext = {
 		".mp4"
 	],
 	audio : [
-		".flac",
 		".mid",
 		".midi",
 		".wma",

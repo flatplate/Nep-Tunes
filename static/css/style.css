@@ -248,6 +248,10 @@ input[type=range]:focus::-ms-fill-upper {
 	color:#009de6;
 	text-shadow: 0px 0px 3px #33beff;
 }
+.shiny{
+	color:#00aff9;
+	text-shadow: 0px 0px 3px #33beff;
+}
 .sec{
 	left:0;
 	width:100%;
@@ -288,6 +292,9 @@ input[type=range]:focus::-ms-fill-upper {
 }
 .sec #songs-music tr:hover {
     background-color: #96adb6;
+}
+.cur_song{
+	background-color:  #c3d0d5 !important;
 }
 .hidden{
 	display:none;
