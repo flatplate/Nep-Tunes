@@ -9,9 +9,10 @@ var ms = require('mediaserver');
 var getFiles = require("./exts.js");
 var io = require('socket.io')(http);
 
-var db_audio = new Datastore({ filename: './db_audio', autoload: true });
-var db_image = new Datastore({ filename: './db_image', autoload: true });
-var db_video = new Datastore({ filename: './db_video', autoload: true });
+var db_audio 		= new Datastore({ filename: './db_audio', autoload: true });
+var db_image 		= new Datastore({ filename: './db_image', autoload: true });
+var db_video 		= new Datastore({ filename: './db_video', autoload: true });
+var db_playlist 	= new Datastore({ filename: './db_playlist', autoload: true });
 
 app.use(express.static('static'));
 app.use(bodyParser.urlencoded({extended:false}));
@@ -35,6 +36,16 @@ getFiles.find("C:\\", function(type, file, name){
 			console.log(err);
 		});
 	};
+	else if(type === "video"){
+		var doc = {
+			'path' 		: file,
+			'name'		: name.split(".")[0],
+			'album' 	: file.split("\\")[file.split("\\").length - 2]
+		} 
+		db_video.insert(doc, function(err){
+			console.log(err);
+		});
+	}
 });
 
 http.listen(1997, function(){
@@ -55,5 +66,18 @@ io.on('connection', function (socket) {
 	  	for(var i = 0; i < docs.length; i++){
 	  		socket.emit('audio', docs[i]);
 	  	}
-  });
+	  	socket.emit('audio_done');
+  	});
+  	db_video.find({}).sort({ name: 1 }).exec(function (err, docs){
+	  	for(var i = 0; i < docs.length; i++){
+	  		socket.emit('video', docs[i]);
+	  	}
+	  	socket.emit('video_done');
+  	});
+  	db_image.find({}).sort({ name: 1 }).exec(function (err, docs){
+	  	for(var i = 0; i < docs.length; i++){
+	  		socket.emit('image', docs[i]);
+	  	}
+	  	socket.emit('image_done');
+  	});
 });

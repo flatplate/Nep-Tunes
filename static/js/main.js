@@ -8,13 +8,20 @@ var socket = io();
 var audios = [];
 var videos = [];
 var images = [];
+var albums = [];
+
+var doneAud = false;
+var doneVid = false;
+var doneImg = false;
 
 curr_ids = [];
 
 var tdize = function(str){
 	return '<td><div>' + str + '</div></td>';
 }
+var updateUIAlbums = function(albumList){
 
+}
 socket.on('connect', function(){
 	socket.emit('secretHandshake:P', {msg:'lololol'});
 	console.log("connected");
@@ -24,13 +31,18 @@ socket.on('audio', function(obj){
 	console.log("woohoo");
 	curr_ids.push(obj._id);
 	$('#songs-music > tbody').append('<tr class="roww" id="' + obj._id + '">'+ tdize(obj.name) + tdize(obj.album) + tdize(obj.path) + '</tr>');  
-
 });
 socket.on('video', function(obj){
 	videos.push(obj);
 });
+socket.on('video_done', function(){
+	doneVid = true;
+});
 socket.on('image', function(obj){
 	images.push(obj);
+});
+socket.on('image_done', function(){
+	doneImg = true;
 });
 socket.on('set_audio', function(aud){
 

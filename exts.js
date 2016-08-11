@@ -33,7 +33,6 @@ var bannedDirs = [
 	"C:\\Intel",
 	"C:\\PerfLogs",
 	"C:\\Python27",
-	"C:\\Riot Games",
 	"C:\\sqlite3",
 	"C:\\Windows",
 	"C:\\Windows.old",
@@ -61,9 +60,7 @@ var fromDir = function(startPath, callback){
 	        var stat = fs.lstatSync(filename);
 	        if (stat.isDirectory() && bannedDirs.indexOf(filename) === -1 && bannedDirs.indexOf(files[i]) === -1&& files[i][0] !="."){
 	  //      	console.log(filename + bannedDirs.indexOf(filename));
-	        
 	            fromDir(filename, callback); //recurse
-
 	        }
 	        else if (ext.video.indexOf(path.extname(filename))>-1) {
 	            console.log('-- found video: ',filename);
@@ -74,9 +71,6 @@ var fromDir = function(startPath, callback){
 	//            console.log(typeof(callback));
 	//            console.log(callback);
 	            callback("audio", filename, files[i]);
-	        }
-	        else{
-	  //      	console.log(path.extname(filename));
 	        };
     	}
     	catch(err){
