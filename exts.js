@@ -25,22 +25,6 @@ var ext = {
 }
 
 var bannedDirs = [
-	"C:\\Program Files (x86)",
-	"C:\\Program Files",
-	"C:\\ProgramData",
-	"C:\\$WINDOWS.~BT",
-	"C:\\Riot Games",
-	"C:\\Intel",
-	"C:\\PerfLogs",
-	"C:\\Python27",
-	"C:\\sqlite3",
-	"C:\\Windows",
-	"C:\\Windows.old",
-	"C:\\Windows10Upgrade",
-	"AndroidStudioProjects",
-	"AppData",
-	"GitHub",
-	"Visual Studio 2013"
 ];
 
 

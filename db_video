@@ -1,1 +1,7 @@
+{"path":"/home/ural/opencv/opencv/samples/data/768x576.avi","name":"768x576","album":"data","_id":"1STTWeupyMcVgRUZ"}
+{"path":"/home/ural/opencv/opencv/samples/data/Megamind.avi","name":"Megamind","album":"data","_id":"937WdMJreNmXve5r"}
+{"path":"/home/ural/Nep-Tunes/node_modules/mediaserver/sample/birds.ogg","name":"birds","album":"sample","_id":"9czCqjTFaQrxjlAO"}
+{"path":"/home/ural/opencv/opencv/samples/data/Megamind_bugy.avi","name":"Megamind_bugy","album":"data","_id":"DqVa7rmuq5NeeAgb"}
+{"path":"/home/ural/opencv/opencv/samples/data/tree.avi","name":"tree","album":"data","_id":"ZiID0iqgAQQCaGkD"}
+{"path":"/home/ural/opencv/opencv/samples/cpp/tutorial_code/calib3d/real_time_pose_estimation/Data/box.mp4","name":"box","album":"Data","_id":"xPBx6QSZKsRTOLie"}
 {"$$indexCreated":{"fieldName":"path","unique":true,"sparse":false}}

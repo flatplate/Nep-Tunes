@@ -1,98 +1,101 @@
 <html>
-	<head>
-		<link rel="stylesheet" href="css/style.css">
-		<link rel="stylesheet" href="font-awesome-4.6.3/css/font-awesome.min.css">
-		<script src="js/jquery-3.1.0.min.js"></script>
-		<script src="/socket.io/socket.io.js"></script>
-		<script type="text/javascript" src="js/table_sorter.js"></script> 
-		<script src="js/main.js"></script>
-		<link href='https://fonts.googleapis.com/css?family=Oswald:300' rel='stylesheet' type='text/css'>
-		<link rel="icon" href="images/neptune.jpg">
-		<title>NepTunes Player</title>
-	</head>
-	<body>
-		<div class="container">
-		<div class="logo">
-					<img src="images/neptune.jpg" class="neptune">
-				</div>
-			<div class="nav">
-				
-				<div class="navs">
-					<ul>
-						<li class="nav-but1">
-						<p>Video</p>
-						</li><li class="nav-but2 active">
-						<p>Music</p></li><li class="nav-but3">
-						<p>Images</p>
-						</li>
-					</ul>
-				</div>
-			</div>
-			<div class="sub-menu">
-				<div class="video-sub-menu">
-					
-				</div>
-				<div class="sub-menu-music active">
-					<ul class="sub-menu-music-navs">
-						<li class="sub-menu-music-nav-button1 cur"><p>Artists</p></li>
-						<li class="sub-menu-music-nav-button2"><p>Albums</p></li>
-						<li class="sub-menu-music-nav-button3"><p>Songs</p></li>
-						<li class="sub-menu-music-nav-button4"><p>Playlists</p></li>
-					</ul>
-				</div>
-				<div class="sub-menu-image">
-					<ul class="sub-menu-image-navs">
-						<li class="sub-menu-image-nav-button1 cur"><p>Albums</p></li>
-						<li class="sub-menu-image-nav-button2"><p>Images</p></li>
-					</ul>
-				</div>
-			</div>
-			<div class="main-sec">
-				<div class="sec sec-music-songs hidden">
-					<table id ="songs-music" class="tablesorter">	
-						<thead>
-							<tr style="background: #496069">
-							    <th >Name</th>
-							    <th>Album</th> 
-							    <th>Path</th>
-						  	</tr>
-						</thead>
-						<tbody>
-							
-						</tbody>
-					</table>
-  				</div>
-				<div class="sec sec-music-albums hidden">	
-					<ul class= "albums-list"></ul>
-				</div>
-				<div class="sec sec-music-artists">		
-		<audio ></audio></div>
-				<div class="sec sec-music-playlists hidden">	</div>
-				<div class="sec sec-videos hidden ">			</div>
-				<div class="sec sec-image-albums hidden">		</div>
-				<div class="sec sec-image-images hidden">		</div>
-			</div>
-			<div class="bot-bar">
+  <head>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="font-awesome-4.6.3/css/font-awesome.min.css">
+    <script src="js/jquery-3.1.0.min.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script type="text/javascript" src="js/table_sorter.js"></script> 
+    <script src="js/main.js"></script>
+    <link href='https://fonts.googleapis.com/css?family=Oswald:300' rel='stylesheet' type='text/css'>
+    <link rel="icon" href="images/neptune.jpg">
+    <title>NepTunes Player</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="logo">
+	<img src="images/neptune.jpg" class="neptune">
+      </div>
+      <div class="nav">
+	
+	<div class="navs">
+	  <ul>
+	    <li class="nav-but1">
+	      <p>Video</p>
+	    </li><li class="nav-but2 active">
+	      <p>Music</p></li><li class="nav-but3">
+	      <p>Images</p>
+	    </li>
+	  </ul>
+	</div>
+      </div>
+      <div class="sub-menu">
+	<div class="video-sub-menu">
+	  
+	</div>
+	<div class="sub-menu-music active">
+	  <ul class="sub-menu-music-navs">
+	    <li class="sub-menu-music-nav-button1 cur"><p>Artists</p></li>
+	    <li class="sub-menu-music-nav-button2"><p>Albums</p></li>
+	    <li class="sub-menu-music-nav-button3"><p>Songs</p></li>
+	    <li class="sub-menu-music-nav-button4"><p>Playlists</p></li>
+	  </ul>
+	</div>
+	<div class="sub-menu-image">
+	  <ul class="sub-menu-image-navs">
+	    <li class="sub-menu-image-nav-button1 cur"><p>Albums</p></li>
+	    <li class="sub-menu-image-nav-button2"><p>Images</p></li>
+	  </ul>
+	</div>
+      </div>
+      <div class="main-sec">
+	<div class="sec sec-music-songs hidden">
+	  <table id ="songs-music" class="tablesorter">	
+	    <thead>
+	      <tr style="background: #496069">
+		<th >Name</th>
+		<th>Album</th> 
+		<th>Artist</th>
+		<th>Year</th>
+		<th>Genre</th>
+		<th>Length</th>
+	      </tr>
+	    </thead>
+	    <tbody>
+	      
+	    </tbody>
+	  </table>
+  	</div>
+	<div class="sec sec-music-albums hidden">	
+	  <ul class= "albums-list"></ul>
+	</div>
+	<div class="sec sec-music-artists">		
+	  <audio ></audio></div>
+	<div class="sec sec-music-playlists hidden">	</div>
+	<div class="sec sec-videos hidden ">			</div>
+	<div class="sec sec-image-albums hidden">		</div>
+	<div class="sec sec-image-images hidden">		</div>
+      </div>
+      <div class="bot-bar">
 
-				<div class="slide">
-					<input id = "sld" type="range" minimum="0" maximum="100" step="0.1" value="0">
-				</div>
-				<div class="bot-bar-bot">
-					<div class="mus-info"></div>
-					<div class="controls">
-						<ul class="cons">
-							<li class="con shuffle"><i class="fa fa-random"></i></li>
-							<li class="con prev"><i class="fa fa-step-backward"></i></li>
-							<li class="con backward"><i class="fa fa-backward"></i></li>
-							<li class="con play"><i class="fa fa-play"></i></li>
-							<li class="con forward"><i class="fa fa-forward"></i></li>
-							<li class="con next"><i class="fa fa-step-forward"></i></li>
-							<li class="con repeat"><i class="fa fa-repeat"></i></li>
-						</ul>
-					</div>
-					<div class="sound"></div>
-				</div>
-			</div>
-		</div>
-	</body>
+	<div class="slide">
+	  <input id = "sld" type="range" minimum="0" maximum="100" step="0.1" value="0">
+	</div>
+	<div class="bot-bar-bot">
+	  <div class="mus-info"></div>
+	  <div class="controls">
+	    <ul class="cons">
+	      <li class="con shuffle"><i class="fa fa-random"></i></li>
+	      <li class="con prev"><i class="fa fa-step-backward"></i></li>
+	      <li class="con backward"><i class="fa fa-backward"></i></li>
+	      <li class="con play"><i class="fa fa-play"></i></li>
+	      <li class="con forward"><i class="fa fa-forward"></i></li>
+	      <li class="con next"><i class="fa fa-step-forward"></i></li>
+	      <li class="con repeat"><i class="fa fa-repeat"></i></li>
+	    </ul>
+	  </div>
+	  <div class="sound"></div>
+	</div>
+      </div>
+    </div>
+  </body>
 </html>
