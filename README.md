@@ -1,3 +1,3 @@
 # Nep-Tunes
 
-Nep-Tunes is a browser based media player. 
+Nep-Tunes is a media server-player. 
