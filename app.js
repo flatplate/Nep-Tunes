@@ -1,4 +1,3 @@
-
 var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
@@ -53,6 +52,7 @@ getFiles.find("/home/ural/", function(type, file, name){
 			    if(!err){
 				console.log("replaced object");
 			    }
+			    else console.log(err);
 			});
 		    }
 		}
@@ -67,7 +67,17 @@ getFiles.find("/home/ural/", function(type, file, name){
 	    'album' 	: file.split("/")[file.split("/").length - 2]
 	} 
 	db_video.insert(doc, function(err){
-	    console.log(err);
+	    if(err)console.log(err);
+	});
+    }
+    else if(type === "image"){
+	var doc = {
+	    'path' 	: file,
+	    'name'      : name.split(".")[0],
+	    'album' 	: file.split("/")[file.split("/").length - 2]
+	};
+	db_image.insert(doc, function(err){
+	    if(err)console.log(err);
 	});
     }
 });
@@ -79,10 +89,10 @@ app.get('/', function(req,res){
     res.send(swig.renderFile('./templates/index.html'));
 });
 app.get('/play/:id',function(req,res){
-
     var aud = db_audio.find({_id: req.params.id}, function(err,docs){
     	// We replaced all the event handlers with a simple call to readStream.pipe()
     	ms.pipe(req,res,docs[0].path);
+	console.log("requested file: " + docs[0].path);
     });
 });
 io.on('connection', function (socket) {
