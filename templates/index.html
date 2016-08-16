@@ -7,10 +7,11 @@
     <script type="text/javascript" src="js/table_sorter.js"></script> 
     <script src="js/main.js"></script>
     <link href='https://fonts.googleapis.com/css?family=Oswald:300' rel='stylesheet' type='text/css'>
-    <link rel="icon" href="images/neptune.jpg">
+    <link class="site-icon" rel="icon" href="images/neptune.jpg">
     <title>NepTunes Player</title>
   </head>
   <body>
+    <audio></audio>
     <div class="container">
       <div class="logo">
 	<img src="images/neptune.jpg" class="neptune">
@@ -49,7 +50,7 @@
       </div>
       <div class="main-sec">
 	<div class="sec sec-music-songs hidden">
-	  <table id ="songs-music" class="tablesorter">	
+	  <table id="songs-music" class="tablesorter">	
 	    <thead>
 	      <tr style="background: #496069">
 		<th >Name</th>
@@ -66,14 +67,28 @@
 	  </table>
   	</div>
 	<div class="sec sec-music-albums hidden">	
-	  <ul class= "albums-list"></ul>
+	  <div class="sec-music-albums-container">
+	    
+	  </div>
+	  <div class="sec-music-albums-songlist">
+	    <table id="songs-albums" class="tablesorter">	
+	      <thead>
+		<tr style="background: #496069">
+		  <th>Name</th>
+		  <th>Length</th>
+		</tr>
+	      </thead>
+	      <tbody>
+		
+	      </tbody>
+	    </table>
+	  </div>
 	</div>
-	<div class="sec sec-music-artists">		
-	  <audio ></audio></div>
+	<div class="sec sec-music-artists">		</div>
 	<div class="sec sec-music-playlists hidden">	</div>
-	<div class="sec sec-videos hidden ">			</div>
-	<div class="sec sec-image-albums hidden">		</div>
-	<div class="sec sec-image-images hidden">		</div>
+	<div class="sec sec-videos hidden ">		</div>
+	<div class="sec sec-image-albums hidden">	</div>
+	<div class="sec sec-image-images hidden">	</div>
       </div>
       <div class="bot-bar">
 

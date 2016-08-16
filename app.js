@@ -9,11 +9,15 @@ var ms = require('mediaserver');
 var getFiles = require("./exts.js");
 var io = require('socket.io')(http);
 var mm = require('musicmetadata');
+var readlineSync = require('readline-sync');
 
 var db_audio 		= new Datastore({ filename: './db_audio', autoload: true });
 var db_image 		= new Datastore({ filename: './db_image', autoload: true });
 var db_video 		= new Datastore({ filename: './db_video', autoload: true });
 var db_playlist 	= new Datastore({ filename: './db_playlist', autoload: true });
+
+var user = readlineSync.question('user: ');
+
 
 app.use(express.static('static'));
 app.use(bodyParser.urlencoded({extended:false}));
@@ -26,7 +30,7 @@ db_video.ensureIndex({ fieldName: 'path', unique: true }, function (err) {
 db_image.ensureIndex({ fieldName: 'path', unique: true }, function (err) {
 });
 
-getFiles.find("/home/ural/", function(type, file, name){
+getFiles.find("/home/" + user + "/", function(type, file, name){
     if(type === "audio"){
 	var parser = mm(fs.createReadStream(file), {duration: true}, function (err, tags) {
 	    if (err) throw err;
@@ -34,15 +38,19 @@ getFiles.find("/home/ural/", function(type, file, name){
 	    if(tags.genre.length === 0){tags.genre = ["Unknown Genre"]};
 	    if(tags.album == ""){tags.album = "Unknown Album"};
 	    if(tags.year == ""){tags.year = "Unknown Year"};
+	    if(tags.picture[0] !== undefined){
+		tags.picture[0].data = new Buffer(tags.picture[0].data, 'binary').toString('base64');
+	    }
 	    console.log(tags);
 	    var doc = {
 		'path' 		: file,
-		'title'		: file.split("/")[file.split("/").length - 1],
+		'title'		: file.split("/")[file.split("/").length - 1].split('.')[0],
 		'album'         : tags.album,
 		'artist'        : tags.artist,
 		'year'          : tags.year,
 		'genre'         : tags.genre,
-		'duration'      : tags.duration
+		'duration'      : tags.duration,
+		'pic'           : tags.picture[0]
 	    };
 	    db_audio.insert(doc, function(err){
 		if(err){

@@ -17,13 +17,36 @@ var doneVid = false;
 var doneImg = false;
 
 curr_ids = [];
+allSongs = [];
 
 var tdize = function(str){
     return '<td><div>' + str + '</div></td>';
 }
+function albumDivize(str){
+    return "<div class='sec-music-album-click' albumtitle='" + str + "'><div class='sec-music-album'><div class='album-string'> " + str + "</div></div></div>";
+}
+
 var updateUIAlbums = function(albumList){
 
 }
+function where(array, properties){
+    var retArr = [];
+    for(var i = 0; i < array.length; i++){
+	for(var j in properties){
+	    var key = j;
+	    var val = properties[j];
+	    if(debug)console.log(properties);
+	    try{
+		if(array[i][key] === val)retArr.push(array[i]);
+	    }
+	    catch(err){
+		console.log(err);
+	    }
+	}
+    }
+    return retArr;
+}
+
 socket.on('connect', function(){
     socket.emit('secretHandshake:P', {msg:'lololol'});
     console.log("connected");
@@ -31,6 +54,7 @@ socket.on('connect', function(){
     $('.nav').css('filter', 'hue-rotate(0deg)');
     $('.sub-menu').css('filter', 'hue-rotate(0deg)');
     $('.bot-bar').css('filter', 'hue-rotate(0deg)');
+    $('.site-icon').css('filter', 'hue-rotate(0deg)');
 });
 socket.on('disconnect', function(){
     console.log("disconnected");
@@ -40,13 +64,22 @@ socket.on('disconnect', function(){
     $('.nav').css('filter', 'hue-rotate(155deg)');
     $('.sub-menu').css('filter', 'hue-rotate(155deg)');
     $('.bot-bar').css('filter', 'hue-rotate(145deg)');
+    $('.site-icon').css('filter', 'hue-rotate(145deg)');
 });
 socket.on('audio', function(obj){
     audios.push(obj);
+    if(albums.indexOf(obj.album) == -1){
+	albums.push(obj.album);
+	$('.sec-music-albums-container').append(albumDivize(obj.album));
+	var lastAppend = $("[albumtitle = '" + obj.album + "']");
+	if(obj.pic !== undefined)
+	    lastAppend.css('background-image', "url(data:image/"+ obj.pic.format  +";base64," + obj.pic.data + ')');
+    };
     if(debug){
 	console.log("woohoo");
     }
     curr_ids.push(obj._id);
+    allSongs.push(obj._id);
     $('#songs-music > tbody').append('<tr class="roww" id="' + obj._id + '">'+ tdize(obj.title) + tdize(obj.album) + tdize(obj.artist.join(", ")) + tdize(obj.year)+ tdize(obj.genre.join(", ")) + tdize(Math.floor(obj.duration/60).toString() +":" + (obj.duration%60).toString()) +  '</tr>');  
 });
 socket.on('video', function(obj){
@@ -112,7 +145,9 @@ $(document).ready(function(){
 	subActive["music"] = $(this).text().toLowerCase();
 	$(".sec").addClass("hidden");
 	$(".sec-music-" + $(this).text().toLowerCase()).removeClass("hidden");
-
+	if($(this).text().toLowerCase() == "songs"){
+	    curr_ids = allSongs;
+	}
     });
     $(".sub-menu-image li").click(function(){
 	$(".sub-menu-image li").removeClass("cur");
@@ -124,11 +159,21 @@ $(document).ready(function(){
     $(".sub-menu-video li").click(function(){
 	$(".sub-menu-video li").removeClass("cur");
 	$(this).addClass("cur");
-	
     });
     $("thead  th").click(function(){
 	var ind = $(this).prevAll().length; 
 	curr_ids = table_sorter.sort($(this).closest('table'), ind);
+    });
+    $(document).on('click', '.sec-music-album-click', function(){
+	$("#songs-albums > tbody").empty();
+	curr_ids = [];
+	var songs = where(audios, {album: $(this).attr('albumtitle')});
+	console.log("hehe " + $(this).attr('albumtitle'));
+	for(var i = 0; i < songs.length ; i++){
+	    console.log("pushing to list");
+	    curr_ids.push(songs[i]._id);
+	    $('#songs-albums > tbody').append('<tr class="roww" id="' + songs[i]._id + '">'+ tdize(songs[i].title)  + tdize(Math.floor(songs[i].duration/60).toString() +":" + (songs[i].duration%60).toString()) +  '</tr>');  
+	}	
     });
     $(document).on('click', "tbody tr" ,function(){
 	console.log("asdf madafaka");
@@ -147,9 +192,7 @@ $(document).ready(function(){
 	audio.currentTime = $(this).val();
     });
     $(document).on('click', '.fa-play', function(){
-	
 	audio.play();
-	
     });
     audio.onplay = function(){
 	toggle_play($(".fa-play"));
