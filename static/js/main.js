@@ -60,6 +60,8 @@ socket.on('disconnect', function(){
     console.log("disconnected");
     $('tbody').empty();
     curr_ids = [];
+    allSongs = [];
+    audios = [];
     $('.neptune').css('filter', 'hue-rotate(155deg)');
     $('.nav').css('filter', 'hue-rotate(155deg)');
     $('.sub-menu').css('filter', 'hue-rotate(155deg)');

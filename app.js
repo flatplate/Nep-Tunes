@@ -10,6 +10,7 @@ var getFiles = require("./exts.js");
 var io = require('socket.io')(http);
 var mm = require('musicmetadata');
 var readlineSync = require('readline-sync');
+var open = require('open');
 
 var db_audio 		= new Datastore({ filename: './db_audio', autoload: true });
 var db_image 		= new Datastore({ filename: './db_image', autoload: true });
@@ -18,6 +19,7 @@ var db_playlist 	= new Datastore({ filename: './db_playlist', autoload: true });
 
 var user = readlineSync.question('user: ');
 
+open('http://localhost:1997');
 
 app.use(express.static('static'));
 app.use(bodyParser.urlencoded({extended:false}));
@@ -41,7 +43,7 @@ getFiles.find("/home/" + user + "/", function(type, file, name){
 	    if(tags.picture[0] !== undefined){
 		tags.picture[0].data = new Buffer(tags.picture[0].data, 'binary').toString('base64');
 	    }
-	    console.log(tags);
+	    //console.log(tags);
 	    var doc = {
 		'path' 		: file,
 		'title'		: file.split("/")[file.split("/").length - 1].split('.')[0],
@@ -49,7 +51,7 @@ getFiles.find("/home/" + user + "/", function(type, file, name){
 		'artist'        : tags.artist,
 		'year'          : tags.year,
 		'genre'         : tags.genre,
-		'duration'      : tags.duration,
+		'duration'      : Math.floor(tags.duration),
 		'pic'           : tags.picture[0]
 	    };
 	    db_audio.insert(doc, function(err){
@@ -111,7 +113,7 @@ io.on('connection', function (socket) {
 		fs.accessSync(docs[i].path, fs.F_OK);
 		console.log("sending audio");
 		socket.emit('audio', docs[i]);
-		console.log(docs[i]);
+		//console.log(docs[i]);
 		// Do something
 	    } catch (e) {
 

@@ -307,11 +307,21 @@ input[type=range]:focus::-ms-fill-upper {
     display: auto;
 }
 .sec-music-albums-songlist{
+    padding-right:30px;
     width:60%;
     float:right;
+    overflow-y:scroll;
+    overflow-x:hidden;
+    table-layout:fixed;
     position: fixed;
     top:150px;
     right:20px;
+    bottom: 110px;
+    padding:0;
+    word-wrap: break-word;
+}
+.sec-music-albums-songlist#songs-albums{
+    margin-right: 200px;
 }
 .sec #songs-albums{
     width: 100%;
